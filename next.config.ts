@@ -1,11 +1,13 @@
 import type { NextConfig } from 'next';
 import type { Configuration } from 'webpack';
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['three', '@react-three/fiber', '@react-three/drei'],
-  output: 'export',
-  basePath: '/sesa0000',
+  output: isProduction ? 'export' : undefined,
+  basePath: isProduction ? '/sesa0000' : '',
   images: {
     unoptimized: true,
     disableStaticImages: true,
