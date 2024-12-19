@@ -100,7 +100,7 @@ const content: Content = {
 };
 
 export default function Contact() {
-  const [currentLang, setCurrentLang] = useState<Language>('en');
+  const [currentLang, setCurrentLang] = useState<Language>('de');
 
   const handleLanguageChange = (lang: Language) => {
     console.log('Language changed to:', lang);
@@ -138,7 +138,7 @@ export default function Contact() {
                   onClick={() => handleLanguageChange(lang)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors
                            hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500
-                           ${currentLang === lang ? 'bg-green-100 text-red-600' : ''}`}
+                           ${currentLang === lang ? 'bg-green-100 text-yellow-600' : ''}`}
                 >
                   {lang.toUpperCase()}
                 </button>
