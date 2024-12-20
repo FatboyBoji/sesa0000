@@ -5,18 +5,18 @@ import { useRouter } from 'next/navigation';
 import Navbar from '../components/navbar';
 import SesaBG from '../components/sesa_background';
 import SesaIcon from '../components/icons/sesalogoComb';
+import Footer from '@/components/Footer';
 
 export default function NotFound() {
   const router = useRouter();
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      {/* Background */}
       <div className="absolute inset-0 z-0">
         <SesaBG />
       </div>
 
-      {/* Main content */}
+      {/*--------------------------------------------- Main body ---------------------------------------------*/}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
 
@@ -72,16 +72,7 @@ export default function NotFound() {
           </div>
         </main>
 
-        <footer className="bg-gray-800 text-white py-4 px-6 relative">
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="w-24 h-5">
-              <SesaIcon className="text-white w-full h-full" />
-            </div>
-            <p className="text-sm text-center md:text-right">
-              © tjk sesa exclusive information service, 2024.06/ 2.8
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );

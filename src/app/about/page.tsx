@@ -1,6 +1,7 @@
 import Navbar from '../../components/navbar';
 import SesaBG from '../../components/sesa_background';
 import SesaIcon from '../../components/icons/sesalogoComb';
+import Footer from '@/components/Footer';
 
 
 export default function About() {
@@ -29,16 +30,7 @@ export default function About() {
       </main>
 
       {/* Static Footer */}
-      <footer className="bg-gray-800 text-white py-4 px-6">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="w-24 h-5">
-            <SesaIcon className="text-white w-full h-full" />
-          </div>
-          <p className="text-sm text-center md:text-right">
-            © tjk sesa exclusive information service, 2024.06/ 2.8
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

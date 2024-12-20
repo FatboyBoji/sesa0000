@@ -6,33 +6,34 @@ import SesaBG from '../components/sesa_background';
 import SesaIcon from '../components/icons/sesalogoComb';
 import Navbar from '../components/navbar';
 import Link from 'next/link';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   const containerRef = useRef(null);
   const { scrollY } = useScroll();
   
-  // Modified transformations for sideways movement
-  const logoX = useTransform(scrollY, [0, 300], [0, 100]); // Slide right
+  // animation for the logo and text in the main body.
+  // logo goes right, text goes left
+  const logoX = useTransform(scrollY, [0, 300], [0, 100]); 
   const logoOpacity = useTransform(scrollY, [0, 300], [1, 0]);
-  const textX = useTransform(scrollY, [0, 300], [0, -100]); // Slide left
+  const textX = useTransform(scrollY, [0, 300], [0, -100]); 
   const textOpacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <div className="min-h-screen flex flex-col relative" ref={containerRef}>
-      {/* Background */}
+    <div className="min-h-screen overflow-hidden flex flex-col relative" ref={containerRef}>
+      {/* My Costumized Background ------------ Waterprint SESA Style -------------------------------------- */}
       <div className="absolute inset-0">
         <SesaBG />
       </div>
 
-      {/* Navbar */}
+      {/* My Navbar */}
       <Navbar />
 
-      {/* Main content */}
+      {/*--------------------------------------------- Main body ---------------------------------------------*/}
       <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10 mt-16">
-        <div className="max-w-[90rem] mx-auto"> {/* Increased max-width for larger screens */}
-          {/* Hero Section */}
+        <div className="max-w-[90rem] mx-auto"> 
           <div className="min-h-[80vh] flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Logo - Updated mobile styles */}
+            {/* Logo - Animation */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -45,7 +46,7 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Text Content - Updated mobile styles */}
+            {/* sesa..Text - Animation */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -53,6 +54,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="lg:order-1 space-y-4 sm:space-y-6 text-center lg:text-left px-4 sm:px-0"
             >
+              {/* Sesa ausgeschrieben */}
               <h1 className="text-3xl sm:text-5xl lg:text-6xl 2xl:text-7xl font-bold text-gray-800 tracking-tight transition-all duration-300">
                 Software Entwicklung
                 <span className="block text-green-600 mt-2">Software Architectur</span>
@@ -60,6 +62,7 @@ export default function Home() {
               <p className="text-base sm:text-xl 2xl:text-2xl text-gray-600 leading-relaxed max-w-2xl mx-auto lg:mx-0">
                 We supply software systems for your business.
               </p>
+              {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <Link 
                   href="/contact"
@@ -77,16 +80,16 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* Feature Cards - Updated mobile styles */}
+          {/* eventueller content unten in blocks ? */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid md:grid-cols-3 gap-6 sm:gap-8 mt-16 sm:mt-24 px-4 sm:px-0"
           >
-            {/* Cards with responsive sizing */}
+            {/* each card has a title and a description  --- demo content */}
             {[
-              { title: 'Expertise', desc: 'lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .' },
+              { title: 'Expertise', desc: 'lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .' },
               { title: 'work', desc: 'solutions for modern challenges.' },
               { title: 'Results', desc: 'Measurable outcomes and sustainable growth.' }
             ].map((card, index) => (
@@ -99,17 +102,8 @@ export default function Home() {
         </div>
       </main>
 
-      {/* Static Footer */}
-      <footer className="bg-gray-800 text-white py-4 px-6">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="w-24 h-5">
-            <SesaIcon className="text-white w-full h-full" />
-          </div>
-          <p className="text-sm text-center md:text-right">
-            © tjk sesa exclusive information service, 2024.06/ 2.8
-          </p>
-        </div>
-      </footer>
+      {/* My Footer */}
+      <Footer />
     </div>
   );
 }

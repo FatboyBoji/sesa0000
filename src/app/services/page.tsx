@@ -3,8 +3,8 @@ import SesaBG from '../../components/sesa_background';
 import SesaIcon from '../../components/icons/sesalogoComb';
 import Link from 'next/link';
 import ServicesSideNav from '../../components/services-sidenav';
+import Footer from '@/components/Footer';
 
-// Define interfaces for our types
 interface JavadocItem {
   version: string;
   status: string;
@@ -46,13 +46,13 @@ const javadocVersions = [
   { version: '1.4.2', status: 'legacy' },
 ];
 
-// Define services data with proper typing
 const services: Service[] = [
   {
     title: "Javadoc Repository",
     description: "Access comprehensive Java API documentation across multiple versions",
     items: javadocVersions.map(version => ({
       ...version,
+      // took link structure from the old website
       link: `http://178.254.12.86:4080/exported/data/jdk${version.version}/doc/index.html`,
       type: 'javadoc' as const
     }))
@@ -78,6 +78,7 @@ const services: Service[] = [
     ]
   },
   {
+    // haha easteregg, will be soon released :)
     title: "Nitora",
     description: "first chat service provided by SESA",
     items: [
@@ -104,14 +105,12 @@ export default function Services() {
     <div className="min-h-screen flex flex-col">
       <SesaBG />
 
-      {/* Navbar Component */}
       <Navbar />
 
       <div className="flex-grow flex">
-        {/* Side Navigation */}
         <ServicesSideNav services={services} />
 
-        {/* Main Content - Add margin to prevent overlap */}
+        {/*--------------------------------------------- Main body ---------------------------------------------*/}
         <main className="flex-grow lg:ml-72 px-6 py-16 relative z-10">
           {services.map((service, index) => (
             <section 
@@ -171,17 +170,8 @@ export default function Services() {
         </main>
       </div>
 
-      {/* Static Footer */}
-      <footer className="bg-gray-800 text-white py-4 px-6 relative z-10">
-        <div className="container mx-auto flex flex-col md:flex-row lg:flex-row items-center justify-between gap-4">
-          <div className="w-24 h-5">
-            <SesaIcon className="text-white w-full h-full" />
-          </div>
-          <p className="text-sm text-center md:text-right">
-            © tjk sesa exclusive information service, 2024.06/ 2.8
-          </p>
-        </div>
-      </footer>
+      {/*--------------------------------------------- footer ---------------------------------------------*/}
+      <Footer />
     </div>
   );
 }

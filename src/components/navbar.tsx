@@ -26,7 +26,8 @@ export default function Navbar({ className }: NavbarProps) {
       window.addEventListener('scroll', handleScroll);
       return () => window.removeEventListener('scroll', handleScroll);
     } else {
-      setShowFullNav(true); // Always show full nav on other pages
+      // Always show full nav on other pages
+      setShowFullNav(true); 
     }
   }, [isHomePage]);
 
@@ -57,7 +58,7 @@ export default function Navbar({ className }: NavbarProps) {
         <motion.nav
           initial={{ opacity: 0 }}
           animate={{ opacity: showFullNav ? 1 : 0 }}
-          className="fixed top-0 left-0 right-0 z-40 bg-white/90 backdrop-blur-sm border-b border-gray-100"
+          className="fixed top-0 left-0 right-0 z-30 bg-white/90 backdrop-blur-sm border-b border-gray-100 hidden md:block"
         >
           <div className="max-w-10xl mx-auto py-9 px-6 md:px-10">
             <div className="flex items-center justify-between" />
@@ -65,26 +66,32 @@ export default function Navbar({ className }: NavbarProps) {
         </motion.nav>
       )}
 
+      {/* Desktop Navbar */}
       <nav className={`
-        fixed top-0 left-0 right-0 z-[100] 
+        fixed top-0 left-0 right-0 z-40 
         transition-all duration-300
         py-4 px-6 md:px-10
         ${!isHomePage ? 'bg-white/90 backdrop-blur-sm border-b border-gray-100' : ''}
-        ${className}`}
-      >
+        ${className}
+        hidden md:block
+      `}>
         <div className="max-w-10xl mx-auto flex items-center justify-between relative">
-          {/* Logo */}
+          {/* Logo - Hidden on mobile homepage until scroll */}
           <motion.div
             initial={isHomePage ? { opacity: 0 } : { opacity: 1 }}
             animate={{ opacity: isHomePage ? (showFullNav ? 1 : 0) : 1 }}
-            className="relative z-10 w-32 md:w-40 h-10 md:h-10"
+            className={`
+              relative z-10 w-32 md:w-40 h-10 md:h-10
+              ${isHomePage ? 'hidden md:block' : ''}
+              ${showFullNav ? '!block' : ''}
+            `}
           >
             <Link href="/">
               <SesaIcon className="text-black w-full h-full" />
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - Always hidden on mobile */}
           <ul className="hidden md:flex items-center gap-8 relative z-[101]">
             {['/', '/about'].map((path, index) => {
               const linkNames = ['Home', 'About'];
@@ -191,10 +198,13 @@ export default function Navbar({ className }: NavbarProps) {
             </li>
           </ul>
 
-          {/* Mobile Menu Button with Animation */}
+          {/* Mobile Menu Button */}
           <button 
             onClick={() => setSidebarOpen(!isSidebarOpen)}
-            className="md:hidden p-2 relative z-10"
+            className={`
+              md:hidden p-2 relative z-10
+              ${isHomePage && !showFullNav ? 'ml-auto' : ''}
+            `}
             aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
           >
             <div className="w-6 h-5 relative flex items-center justify-center">
@@ -218,13 +228,71 @@ export default function Navbar({ className }: NavbarProps) {
         </div>
       </nav>
 
-      {/* Spacer div to prevent content from going under navbar */}
-      <div className="h-[72px] md:h-[80px]" /> {/* Adjust height to match navbar height */}
+      {/* Mobile Navbar - Added background transition */}
+      <nav className={`
+        fixed top-0 left-0 right-0 z-50
+        transition-all duration-300
+        py-4 px-6
+        ${!isHomePage || showFullNav ? 'bg-white/90 backdrop-blur-sm border-b border-gray-100' : ''}
+        ${className}
+        md:hidden
+      `}>
+        <div className="max-w-10xl mx-auto flex items-center justify-between relative">
+          {/* Logo - Hidden on mobile homepage until scroll */}
+          <motion.div
+            initial={isHomePage ? { opacity: 0 } : { opacity: 1 }}
+            animate={{ opacity: isHomePage ? (showFullNav ? 1 : 0) : 1 }}
+            className={`
+              relative z-10 w-32 h-10
+              ${isHomePage ? 'hidden' : ''}
+              ${showFullNav ? '!block' : ''}
+            `}
+          >
+            <Link href="/">
+              <SesaIcon className="text-black w-full h-full" />
+            </Link>
+          </motion.div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            onClick={() => setSidebarOpen(!isSidebarOpen)}
+            className={`
+              p-2 relative z-10
+              ${isHomePage && !showFullNav ? 'ml-auto' : ''}
+            `}
+            aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+          >
+            <div className="w-6 h-5 relative flex items-center justify-center">
+              <div className={`
+                w-full h-0.5 bg-gray-800 absolute
+                transition-all duration-300 ease-in-out
+                ${isSidebarOpen ? 'rotate-45' : 'translate-y-[-8px]'}
+              `}></div>
+              <div className={`
+                w-full h-0.5 bg-gray-800 absolute
+                transition-all duration-300 ease-in-out
+                ${isSidebarOpen ? 'opacity-0' : 'opacity-100'}
+              `}></div>
+              <div className={`
+                w-full h-0.5 bg-gray-800 absolute
+                transition-all duration-300 ease-in-out
+                ${isSidebarOpen ? '-rotate-45' : 'translate-y-[8px]'}
+              `}></div>
+            </div>
+          </button>
+        </div>
+      </nav>
+
+      {/* Spacer div - Adjust height for mobile homepage */}
+      <div className={`
+        md:h-[80px]
+        ${isHomePage ? 'h-[60px]' : 'h-[72px]'}
+      `} />
 
       {/* Mobile Sidebar */}
       <div 
         className={`
-          fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden
+          fixed inset-0 bg-black bg-opacity-50 z-[60] md:hidden
           transition-opacity duration-300 overflow-x-hidden
           ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
         `}

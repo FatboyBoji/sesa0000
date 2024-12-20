@@ -5,8 +5,9 @@ import Navbar from '../../components/navbar';
 import SesaBG from '../../components/sesa_background';
 import SesaIcon from '../../components/icons/sesalogoComb';
 import ContactForm from '../../components/ContactForm';
+import Footer from '@/components/Footer';
 
-// Define types for our content structure
+// Different languages hardcoded
 type Language = 'en' | 'de' | 'bg';
 
 interface ContentType {
@@ -121,18 +122,16 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col relative">
-      {/* Background with lower z-index */}
       <div className="absolute inset-0 z-0">
         <SesaBG />
       </div>
 
-      {/* Main content with higher z-index */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
 
         <main className="flex-grow container mx-auto px-6 py-12">
           <div className="max-w-7xl mx-auto">
-            {/* Header Section */}
+            {/* Titel und info text oben */}
             <div className="text-center mb-16">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
                 {content[currentLang].title}
@@ -142,7 +141,7 @@ export default function Contact() {
               </p>
             </div>
 
-            {/* Language Selector */}
+            {/* Sprachen Auswahl */}
             <div className="mb-12 flex justify-center text-green-600 space-x-4">
               {(Object.keys(content) as Language[]).map((lang) => (
                 <button
@@ -157,7 +156,7 @@ export default function Contact() {
               ))}
             </div>
 
-            {/* Main Content Grid */}
+            {/*--------------------------------------------- Main Content Grid ---------------------------------------------*/}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Contact Form */}
               <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -170,7 +169,7 @@ export default function Contact() {
                 <ContactForm content={content[currentLang].form} />
               </div>
 
-              {/* Right Column - Additional Info */}
+              {/* right side - Additional Info */}
               <div className="space-y-8">
                 {/* Contact Information */}
                 <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -232,7 +231,7 @@ export default function Contact() {
                   </div>
                 </div>
 
-                {/* Map or Additional Content */}
+                {/* in der therio kann man noch was rein machen -> mehr kontent */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 h-64 flex items-center justify-center">
                   <p className="text-gray-500">-- extra Information hier --</p>
                 </div>
@@ -241,16 +240,7 @@ export default function Contact() {
           </div>
         </main>
 
-        <footer className="bg-gray-800 text-white py-4 px-6 relative">
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="w-24 h-5">
-              <SesaIcon className="text-white w-full h-full" />
-            </div>
-            <p className="text-sm text-center md:text-right">
-              © tjk sesa exclusive information service, 2024.06/ 2.8
-            </p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </div>
   );
