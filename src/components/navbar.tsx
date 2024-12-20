@@ -69,6 +69,7 @@ export default function Navbar({ className }: NavbarProps) {
         fixed top-0 left-0 right-0 z-50 
         transition-all duration-300
         py-4 px-6 md:px-10
+        overflow-x-hidden
         ${!isHomePage ? 'bg-white/90 backdrop-blur-sm border-b border-gray-100' : ''}
         ${className}`}
       >
@@ -202,7 +203,7 @@ export default function Navbar({ className }: NavbarProps) {
       <div 
         className={`
           fixed inset-0 bg-black bg-opacity-50 z-50 md:hidden
-          transition-opacity duration-300
+          transition-opacity duration-300 overflow-x-hidden
           ${isSidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}
         `}
         onClick={handleOverlayClick}
@@ -214,76 +215,120 @@ export default function Navbar({ className }: NavbarProps) {
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           flex flex-col
         `}>
-          {/* Mobile Navigation Items */}
-          <div className="flex-grow overflow-y-auto p-4">
-            <ul className="space-y-2">
-              {['/', '/about'].map((path, index) => {
-                const linkNames = ['Home', 'About'];
-                const isActive = isLinkActive(path);
+          {/* Close Button */}
+          <div className="absolute top-4 right-4">
+            <button
+              onClick={() => setSidebarOpen(false)}
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 group"
+              aria-label="Close menu"
+            >
+              <svg
+                className="w-5 h-5 text-gray-500 group-hover:text-gray-700 transition-colors"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
 
-                return (
-                  <li key={index}>
-                    <Link
-                      href={path}
-                      className={`
-                        block px-4 py-2.5 rounded-lg
-                        transition-all duration-300
-                        ${isActive ? 
-                          'bg-gray-100 text-black font-medium transform translate-x-2' : 
-                          'text-gray-600 hover:bg-gray-50 hover:text-black'
-                        }
-                      `}
+          {/* Content Container with Flex */}
+          <div className="flex flex-col h-full">
+            {/* Mobile Navigation Items */}
+            <div className="flex-grow overflow-y-auto p-6 pt-16">
+              <ul className="space-y-2">
+                {['/', '/about'].map((path, index) => {
+                  const linkNames = ['Home', 'About'];
+                  const isActive = isLinkActive(path);
+
+                  return (
+                    <li key={index}>
+                      <Link
+                        href={path}
+                        className={`
+                          block px-4 py-2.5 rounded-lg
+                          transition-all duration-300
+                          ${isActive ? 
+                            'bg-gray-100 text-black font-medium transform translate-x-2' : 
+                            'text-gray-600 hover:bg-gray-50 hover:text-black'
+                          }
+                        `}
+                        onClick={() => setSidebarOpen(false)}
+                      >
+                        {linkNames[index]}
+                      </Link>
+                    </li>
+                  );
+                })}
+
+                {/* Mobile Services Section */}
+                <li>
+                  <div className="px-4 py-2.5 text-gray-700">
+                    <Link 
+                      href="/services"
+                      className={`block mb-2 ${isLinkActive('/services') ? 'font-medium text-black' : ''}`}
                       onClick={() => setSidebarOpen(false)}
                     >
-                      {linkNames[index]}
+                      Services
                     </Link>
-                  </li>
-                );
-              })}
+                    <ul className="ml-4 border-l border-gray-200 space-y-1">
+                      {services.map((service, index) => (
+                        <li key={index}>
+                          <Link
+                            href={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 transition-colors"
+                            onClick={() => setSidebarOpen(false)}
+                          >
+                            {service}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
 
-              {/* Mobile Services Section */}
-              <li>
-                <div className="px-4 py-2.5 text-gray-700">
-                  <Link 
-                    href="/services"
-                    className={`block mb-2 ${isLinkActive('/services') ? 'font-medium text-black' : ''}`}
+                <li>
+                  <Link
+                    href="/contact"
+                    className={`
+                      block px-4 py-2.5 rounded-lg
+                      transition-all duration-300
+                      ${isLinkActive('/contact') ? 
+                        'bg-gray-100 text-black font-medium transform translate-x-2' : 
+                        'text-gray-600 hover:bg-gray-50 hover:text-black'
+                      }
+                    `}
                     onClick={() => setSidebarOpen(false)}
                   >
-                    Services
+                    Contact
                   </Link>
-                  <ul className="ml-4 border-l border-gray-200 space-y-1">
-                    {services.map((service, index) => (
-                      <li key={index}>
-                        <Link
-                          href={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`}
-                          className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 transition-colors"
-                          onClick={() => setSidebarOpen(false)}
-                        >
-                          {service}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </li>
+                </li>
+              </ul>
+            </div>
 
-              <li>
-                <Link
-                  href="/contact"
-                  className={`
-                    block px-4 py-2.5 rounded-lg
-                    transition-all duration-300
-                    ${isLinkActive('/contact') ? 
-                      'bg-gray-100 text-black font-medium transform translate-x-2' : 
-                      'text-gray-600 hover:bg-gray-50 hover:text-black'
-                    }
-                  `}
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
+            {/* Logo Section - Fixed at Bottom */}
+            <div className="mt-auto border-t border-gray-100">
+              <div className="p-6 bg-gradient-to-t from-gray-50/80 to-white/40">
+                <div className="flex items-center justify-between">
+                  <div className="w-24">
+                    <Link 
+                      href="/" 
+                      onClick={() => setSidebarOpen(false)}
+                      className="block transform transition-all duration-200 hover:scale-105"
+                    >
+                      <SesaIcon className="text-black w-full h-full" />
+                    </Link>
+                  </div>
+                  <span className="text-xs text-gray-500 font-medium">v0000</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

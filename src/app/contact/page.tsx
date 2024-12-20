@@ -19,8 +19,11 @@ interface ContentType {
   contactInfo: {
     title: string;
     email: string;
+    emailLabel: string;
     location: string;
+    locationLabel: string;
     hours: string;
+    hoursLabel: string;
   };
   form: {
     name: string;
@@ -41,14 +44,17 @@ const content: Content = {
     title: 'Get in Touch',
     subtitle: 'We are here to help',
     description: {
-      highlight: 'Please',
+      highlight: 'Please,',
       rest: 'do not hesitate to contact us for more information on available products and services.'
     },
     contactInfo: {
       title: 'Other Ways to Connect',
       email: 'info@tjksesa.com',
+      emailLabel: 'Email',
       location: 'Frankfurt, Germany',
-      hours: 'Mon-Fri: 9:00 AM - 6:00 PM CET'
+      locationLabel: 'Location',
+      hours: 'Mon-Fri: 9:00 AM - 6:00 PM CET',
+      hoursLabel: 'Business Hours'
     },
     form: {
       name: 'Your Name',
@@ -61,14 +67,17 @@ const content: Content = {
     title: 'Kontaktieren Sie uns',
     subtitle: 'Wir sind für Sie da',
     description: {
-      highlight: 'Bitte',
+      highlight: 'Bitte,',
       rest: 'zögern Sie nicht, uns für weitere Informationen zu Produkten und Dienstleistungen zu kontaktieren.'
     },
     contactInfo: {
       title: 'Weitere Kontaktmöglichkeiten',
       email: 'info@tjksesa.com',
+      emailLabel: 'E-Mail',
       location: 'Frankfurt, Deutschland',
-      hours: 'Mo-Fr: 9:00 - 18:00 MEZ'
+      locationLabel: 'Standort',
+      hours: 'Mo-Fr: 9:00 - 18:00 MEZ',
+      hoursLabel: 'Geschäftszeiten'
     },
     form: {
       name: 'Ihr Name',
@@ -81,14 +90,17 @@ const content: Content = {
     title: 'Свържете се с нас',
     subtitle: 'Ние сме тук да помогнем',
     description: {
-      highlight: 'Моля',
+      highlight: 'Моля,',
       rest: 'не се колебайте да се свържете с нас за повече информация за налични продукти и услуги.'
     },
     contactInfo: {
       title: 'Други начини за връзка',
       email: 'info@tjksesa.com',
+      emailLabel: 'Имейл',
       location: 'Франкфурт, Германия',
-      hours: 'Пон-Пет: 9:00 - 18:00 ч. ЦЕВ'
+      locationLabel: 'Локация',
+      hours: 'Пон-Пет: 9:00 - 18:00 ч. ЦЕВ',
+      hoursLabel: 'Работно време'
     },
     form: {
       name: 'Вашето име',
@@ -174,7 +186,9 @@ export default function Contact() {
                         </svg>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Email</p>
+                        <p className="text-sm text-gray-500">
+                          {content[currentLang].contactInfo.emailLabel}
+                        </p>
                         <p className="text-lg font-medium" style={{ color: 'tan' }}>
                           {content[currentLang].contactInfo.email}
                         </p>
@@ -190,7 +204,9 @@ export default function Contact() {
                         </svg>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Location</p>
+                        <p className="text-sm text-gray-500">
+                          {content[currentLang].contactInfo.locationLabel}
+                        </p>
                         <p className="text-lg font-medium" style={{ color: 'tan' }}>
                           {content[currentLang].contactInfo.location}
                         </p>
@@ -205,7 +221,9 @@ export default function Contact() {
                         </svg>
                       </div>
                       <div>
-                        <p className="text-sm text-gray-500">Business Hours</p>
+                        <p className="text-sm text-gray-500">
+                          {content[currentLang].contactInfo.hoursLabel}
+                        </p>
                         <p className="text-lg font-medium" style={{ color: 'tan' }}>
                           {content[currentLang].contactInfo.hours}
                         </p>
@@ -216,7 +234,7 @@ export default function Contact() {
 
                 {/* Map or Additional Content */}
                 <div className="bg-white rounded-2xl shadow-lg p-8 h-64 flex items-center justify-center">
-                  <p className="text-gray-500">Map or additional content can be placed here</p>
+                  <p className="text-gray-500">-- extra Information hier --</p>
                 </div>
               </div>
             </div>

@@ -30,9 +30,6 @@ export default function ContactForm({ content }: ContactFormProps) {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-  };
-
-  const handleMessageFocus = () => {
     setShowMessage(true);
   };
 
@@ -79,7 +76,6 @@ export default function ContactForm({ content }: ContactFormProps) {
           rows={4}
           value={formData.message}
           onChange={handleChange}
-          onFocus={handleMessageFocus}
           style={{ color: 'tan' }}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
         />
@@ -87,7 +83,7 @@ export default function ContactForm({ content }: ContactFormProps) {
       
       {showMessage && (
         <div className="text-sm text-green-600 italic animate-fade-in">
-          We appreciate your message and will get back to you soon! 🌟
+          We appreciate your message and will get back to you soon!
         </div>
       )}
 

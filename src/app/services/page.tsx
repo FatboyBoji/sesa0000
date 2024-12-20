@@ -17,6 +17,7 @@ interface ServiceItem {
   status: string;
   link: string;
   type: 'service';
+  inDevelopment?: boolean;
 }
 
 type ServiceItemType = JavadocItem | ServiceItem;
@@ -52,7 +53,7 @@ const services: Service[] = [
     description: "Access comprehensive Java API documentation across multiple versions",
     items: javadocVersions.map(version => ({
       ...version,
-      link: `http://178.254.12.86:4080/exported/data/jdk${version.version}/doc/api/index.html`,
+      link: `http://178.254.12.86:4080/exported/data/jdk${version.version}/doc/index.html`,
       type: 'javadoc' as const
     }))
   },
@@ -60,16 +61,40 @@ const services: Service[] = [
     title: "Test Service 2",
     description: "Description for test service 2",
     items: [
-      { title: "Feature 1", status: "alpha", link: "/service2/feature1", type: 'service' as const },
-      { title: "Feature 2", status: "beta", link: "/service2/feature2", type: 'service' as const },
+      { 
+        title: "Feature 1", 
+        status: "alpha", 
+        link: "/error_pages/404_not_found",
+        type: 'service' as const,
+        inDevelopment: true 
+      },
+      { 
+        title: "Feature 2", 
+        status: "beta", 
+        link: "/error_pages/404_not_found",
+        type: 'service' as const,
+        inDevelopment: true 
+      },
     ]
   },
   {
     title: "Nitora",
     description: "first chat service provided by SESA",
     items: [
-      { title: "ChatApp1", status: "stabel", link: "/service3/tool1", type: 'service' as const },
-      { title: "ChatApp2", status: "beta", link: "/service3/tool2", type: 'service' as const },
+      { 
+        title: "ChatApp1", 
+        status: "stabel", 
+        link: "/not-implemented-yet",
+        type: 'service' as const,
+        inDevelopment: true 
+      },
+      { 
+        title: "ChatApp2", 
+        status: "beta", 
+        link: "/not-implemented-yet",
+        type: 'service' as const,
+        inDevelopment: true 
+      },
     ]
   }
 ];
@@ -86,8 +111,8 @@ export default function Services() {
         {/* Side Navigation */}
         <ServicesSideNav services={services} />
 
-        {/* Main Content */}
-        <main className="flex-grow lg:ml-64 px-6 py-16 relative z-10">
+        {/* Main Content - Add margin to prevent overlap */}
+        <main className="flex-grow lg:ml-72 px-6 py-16 relative z-10">
           {services.map((service, index) => (
             <section 
               key={index} 

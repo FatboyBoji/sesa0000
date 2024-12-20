@@ -1,14 +1,24 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
 import SesaBG from '../components/sesa_background';
 import SesaIcon from '../components/icons/sesalogoComb';
 import Navbar from '../components/navbar';
+import Link from 'next/link';
 
 export default function Home() {
+  const containerRef = useRef(null);
+  const { scrollY } = useScroll();
+  
+  // Modified transformations for sideways movement
+  const logoX = useTransform(scrollY, [0, 300], [0, 100]); // Slide right
+  const logoOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const textX = useTransform(scrollY, [0, 300], [0, -100]); // Slide left
+  const textOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative" ref={containerRef}>
       {/* Background */}
       <div className="absolute inset-0">
         <SesaBG />
@@ -26,6 +36,7 @@ export default function Home() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
+              style={{ x: logoX, opacity: logoOpacity }}
               transition={{ duration: 0.8 }}
               className="lg:order-2 w-full flex justify-center items-center mb-8 lg:mb-0"
             >
@@ -38,6 +49,7 @@ export default function Home() {
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
+              style={{ x: textX, opacity: textOpacity }}
               transition={{ duration: 0.8 }}
               className="lg:order-1 space-y-4 sm:space-y-6 text-center lg:text-left px-4 sm:px-0"
             >
@@ -49,12 +61,18 @@ export default function Home() {
                 We supply software systems for your business.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-                <button className="px-6 py-2.5 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-base sm:text-lg 2xl:text-xl w-full sm:w-auto">
+                <Link 
+                  href="/contact"
+                  className="px-6 py-2.5 sm:py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-base sm:text-lg 2xl:text-xl w-full sm:w-auto text-center"
+                >
                   Get Started
-                </button>
-                <button className="px-6 py-2.5 sm:py-3 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-colors text-base sm:text-lg 2xl:text-xl w-full sm:w-auto">
+                </Link>
+                <Link 
+                  href="/services"
+                  className="px-6 py-2.5 sm:py-3 border border-green-600 text-green-600 rounded-lg hover:bg-green-50 transition-colors text-base sm:text-lg 2xl:text-xl w-full sm:w-auto text-center"
+                >
                   Learn More
-                </button>
+                </Link>
               </div>
             </motion.div>
           </div>
