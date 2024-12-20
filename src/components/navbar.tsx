@@ -66,10 +66,9 @@ export default function Navbar({ className }: NavbarProps) {
       )}
 
       <nav className={`
-        fixed top-0 left-0 right-0 z-50 
+        fixed top-0 left-0 right-0 z-[100] 
         transition-all duration-300
         py-4 px-6 md:px-10
-        overflow-x-hidden
         ${!isHomePage ? 'bg-white/90 backdrop-blur-sm border-b border-gray-100' : ''}
         ${className}`}
       >
@@ -86,7 +85,7 @@ export default function Navbar({ className }: NavbarProps) {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8 relative z-10">
+          <ul className="hidden md:flex items-center gap-8 relative z-[101]">
             {['/', '/about'].map((path, index) => {
               const linkNames = ['Home', 'About'];
               const isActive = isLinkActive(path);
@@ -138,16 +137,39 @@ export default function Navbar({ className }: NavbarProps) {
               </Link>
 
               {/* Services Dropdown Menu */}
-              <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                {services.map((service, index) => (
-                  <Link
-                    key={index}
-                    href={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`}
-                    className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
-                  >
-                    {service}
-                  </Link>
-                ))}
+              <div className={`
+                absolute left-0 top-[calc(100%+0.5rem)]
+                w-64 
+                opacity-0 invisible
+                group-hover:opacity-100 group-hover:visible
+                transition-all duration-200
+                rounded-lg shadow-lg
+                border border-gray-100
+                z-[102]
+                ${isLinkActive('/services') ? 
+                  'bg-gray-900 border-gray-800' : 
+                  'bg-white'
+                }
+              `}>
+                <div className="py-2">
+                  {services.map((service, index) => (
+                    <Link
+                      key={index}
+                      href={`/services#${service.toLowerCase().replace(/\s+/g, '-')}`}
+                      className={`
+                        block px-4 py-2.5
+                        text-sm
+                        transition-colors
+                        ${isLinkActive('/services') ?
+                          'text-gray-300 hover:bg-gray-800 hover:text-white' :
+                          'text-gray-700 hover:bg-gray-50 hover:text-green-600'
+                        }
+                      `}
+                    >
+                      {service}
+                    </Link>
+                  ))}
+                </div>
               </div>
             </li>
 
