@@ -7,41 +7,18 @@ import SesaIcon from '../components/icons/sesalogoComb';
 import Navbar from '../components/navbar';
 
 export default function Home() {
-  const [showNav, setShowNav] = useState(false);
-
-  // Handle navbar visibility on scroll
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowNav(true);
-      } else {
-        setShowNav(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col relative">
       {/* Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0">
         <SesaBG />
       </div>
 
-      {/* Navbar with animation */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: showNav ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        className="sticky top-0 z-50"
-      >
-        <Navbar />
-      </motion.div>
+      {/* Navbar */}
+      <Navbar />
 
       {/* Main content */}
-      <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10">
+      <main className="flex-grow container mx-auto px-4 sm:px-6 py-8 sm:py-12 relative z-10 mt-16">
         <div className="max-w-[90rem] mx-auto"> {/* Increased max-width for larger screens */}
           {/* Hero Section */}
           <div className="min-h-[80vh] flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -91,8 +68,8 @@ export default function Home() {
           >
             {/* Cards with responsive sizing */}
             {[
-              { title: 'Expertise', desc: 'lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .' },
-              { title: 'Innovation', desc: 'Cutting-edge solutions for modern challenges.' },
+              { title: 'Expertise', desc: 'lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .lalalal lalalal lla lal  lla l al la laala la .' },
+              { title: 'work', desc: 'solutions for modern challenges.' },
               { title: 'Results', desc: 'Measurable outcomes and sustainable growth.' }
             ].map((card, index) => (
               <div key={index} className="bg-white p-8 2xl:p-12 rounded-2xl shadow-lg">
