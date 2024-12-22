@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Navbar from '../../components/navbar';
 import SesaBG from '../../components/sesa_background';
-import SesaIcon from '../../components/icons/sesalogoComb';
 import ContactForm from '../../components/ContactForm';
 import Footer from '@/components/Footer';
 

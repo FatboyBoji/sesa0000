@@ -1,6 +1,5 @@
 import Navbar from '../../components/navbar';
 import SesaBG from '../../components/sesa_background';
-import SesaIcon from '../../components/icons/sesalogoComb';
 import Link from 'next/link';
 import ServicesSideNav from '../../components/services-sidenav';
 import Footer from '@/components/Footer';
@@ -152,6 +151,7 @@ export default function Services() {
                           </span>
                         )}
                       </div>
+                      {/*here is the describtion of the javadoc card hardcoded for each one */}
                       <p className="text-gray-600 text-sm">
                         {item.type === 'javadoc' ? 'View complete documentation' : 'Learn more'}
                       </p>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 import SesaBG from '../components/sesa_background';
 import SesaIcon from '../components/icons/sesalogoComb';
 import Navbar from '../components/navbar';
