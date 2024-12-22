@@ -68,8 +68,8 @@ const content: Content = {
     title: 'Kontaktieren Sie uns',
     subtitle: 'Wir sind für Sie da',
     description: {
-      highlight: 'Bitte,',
-      rest: 'zögern Sie nicht, uns für weitere Informationen zu Produkten und Dienstleistungen zu kontaktieren.'
+      highlight: 'Für weitere Informationen',
+      rest: 'zu unseren Produkten und Dienstleistungen stehen wir Ihnen jederzeit gerne zur Verfügung.'
     },
     contactInfo: {
       title: 'Weitere Kontaktmöglichkeiten',
@@ -159,7 +159,7 @@ export default function Contact() {
             {/*--------------------------------------------- Main Content Grid ---------------------------------------------*/}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
               {/* Left Column - Contact Form */}
-              <div className="bg-white rounded-2xl shadow-lg p-8">
+              <div className="bg-white font-semibold rounded-2xl shadow-lg p-8">
                 <p className="text-lg text-gray-600 mb-8">
                   <span className="text-xl font-semibold text-green-600">
                     {content[currentLang].description.highlight}
@@ -173,7 +173,7 @@ export default function Contact() {
               <div className="space-y-8">
                 {/* Contact Information */}
                 <div className="bg-white rounded-2xl shadow-lg p-8">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-6">
+                  <h2 className="text-lg font-semibold text-gray-800 mb-6">
                     {content[currentLang].contactInfo.title}
                   </h2>
                   <div className="space-y-6">

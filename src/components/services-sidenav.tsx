@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function ServicesSideNav({ services }: { services: { title: string }[] }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -135,7 +136,8 @@ export default function ServicesSideNav({ services }: { services: { title: strin
                 <p className="text-sm text-gray-600 mb-4">
                   Click on any service to view its details and available features.
                 </p>
-                <a 
+                {/* using nextjs link is more stable then a tag */}
+                <Link 
                   href="/contact" 
                   className="inline-flex items-center text-sm text-green-600 hover:text-green-700 font-medium group"
                 >
@@ -148,7 +150,7 @@ export default function ServicesSideNav({ services }: { services: { title: strin
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                   </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
